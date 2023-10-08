@@ -50,265 +50,265 @@ try {
   console.log(e);
 }
 
-//getBookNames
-try {
-  const searchAuthorByNameInfo = await authors.searchAuthorByName("Tom");
-  console.log(searchAuthorByNameInfo);
-} catch (e) {
-  console.log(e);
-}
-try {
-  const searchAuthorByNameInfo = await authors.searchAuthorByName("foobar");
-  console.log(searchAuthorByNameInfo);
-} catch (e) {
-  console.log(e);
-}
-try {
-  const searchAuthorByNameInfo = await authors.searchAuthorByName(" ");
-  console.log(searchAuthorByNameInfo);
-} catch (e) {
-  console.log(e);
-}
-try {
-  const searchAuthorByNameInfo = await authors.searchAuthorByName(123);
-  console.log(searchAuthorByNameInfo);
-} catch (e) {
-  console.log(e);
-}
-try {
-  const searchAuthorByNameInfo = await authors.searchAuthorByName();
-  console.log(searchAuthorByNameInfo);
-} catch (e) {
-  console.log(e);
-}
+// //getBookNames
+// try {
+//   const searchAuthorByNameInfo = await authors.searchAuthorByName("Tom");
+//   console.log(searchAuthorByNameInfo);
+// } catch (e) {
+//   console.log(e);
+// }
+// try {
+//   const searchAuthorByNameInfo = await authors.searchAuthorByName("foobar");
+//   console.log(searchAuthorByNameInfo);
+// } catch (e) {
+//   console.log(e);
+// }
+// try {
+//   const searchAuthorByNameInfo = await authors.searchAuthorByName(" ");
+//   console.log(searchAuthorByNameInfo);
+// } catch (e) {
+//   console.log(e);
+// }
+// try {
+//   const searchAuthorByNameInfo = await authors.searchAuthorByName(123);
+//   console.log(searchAuthorByNameInfo);
+// } catch (e) {
+//   console.log(e);
+// }
+// try {
+//   const searchAuthorByNameInfo = await authors.searchAuthorByName();
+//   console.log(searchAuthorByNameInfo);
+// } catch (e) {
+//   console.log(e);
+// }
 
-//getBookNames
-try {
-  const getBookNamesInfo = await authors.getBookNames("Prisca", "Vakhonin");
-  console.log(getBookNamesInfo);
-} catch (e) {
-  console.log(e);
-}
-try {
-  const getBookNamesInfo = await authors.getBookNames(123, 123);
-  console.log(getBookNamesInfo);
-} catch (e) {
-  console.log(e);
-}
-try {
-  const getBookNamesInfo = await authors.getBookNames(" ", " ");
-  console.log(getBookNamesInfo);
-} catch (e) {
-  console.log(e);
-}
-try {
-  const getBookNamesInfo = await authors.getBookNames("Patrick", "Hill");
-  console.log(getBookNamesInfo);
-} catch (e) {
-  console.log(e);
-}
-try {
-  const getBookNamesInfo = await authors.getBookNames("Perrine", "Greenough");
-  console.log(getBookNamesInfo);
-} catch (e) {
-  console.log(e);
-}
-try {
-  const getBookNamesInfo = await authors.getBookNames();
-  console.log(getBookNamesInfo);
-} catch (e) {
-  console.log(e);
-}
+// //getBookNames
+// try {
+//   const getBookNamesInfo = await authors.getBookNames("Prisca", "Vakhonin");
+//   console.log(getBookNamesInfo);
+// } catch (e) {
+//   console.log(e);
+// }
+// try {
+//   const getBookNamesInfo = await authors.getBookNames(123, 123);
+//   console.log(getBookNamesInfo);
+// } catch (e) {
+//   console.log(e);
+// }
+// try {
+//   const getBookNamesInfo = await authors.getBookNames(" ", " ");
+//   console.log(getBookNamesInfo);
+// } catch (e) {
+//   console.log(e);
+// }
+// try {
+//   const getBookNamesInfo = await authors.getBookNames("Patrick", "Hill");
+//   console.log(getBookNamesInfo);
+// } catch (e) {
+//   console.log(e);
+// }
+// try {
+//   const getBookNamesInfo = await authors.getBookNames("Perrine", "Greenough");
+//   console.log(getBookNamesInfo);
+// } catch (e) {
+//   console.log(e);
+// }
+// try {
+//   const getBookNamesInfo = await authors.getBookNames();
+//   console.log(getBookNamesInfo);
+// } catch (e) {
+//   console.log(e);
+// }
 
-//youngestOldest
-try {
-  const youngestOlderInfo = await authors.youngestOldest("Prisca", "Vakhonin");
-  console.log(youngestOlderInfo);
-} catch (e) {
-  console.log(e);
-}
+// //youngestOldest
+// try {
+//   const youngestOlderInfo = await authors.youngestOldest("Prisca", "Vakhonin");
+//   console.log(youngestOlderInfo);
+// } catch (e) {
+//   console.log(e);
+// }
 
-//sameBirthday
-try {
-  const sameBirthdayInfo = await authors.sameBirthday(10, 12);
-  console.log(sameBirthdayInfo);
-} catch (e) {
-  console.log(e);
-}
-try {
-  const sameBirthdayInfo = await authors.sameBirthday(9, 31);
-  console.log(sameBirthdayInfo);
-} catch (e) {
-  console.log(e);
-}
-try {
-  const sameBirthdayInfo = await authors.sameBirthday(13, 25);
-  console.log(sameBirthdayInfo);
-} catch (e) {
-  console.log(e);
-}
-try {
-  const sameBirthdayInfo = await authors.sameBirthday(2, 30);
-  console.log(sameBirthdayInfo);
-} catch (e) {
-  console.log(e);
-}
-try {
-  const sameBirthdayInfo = await authors.sameBirthday("09", "31");
-  console.log(sameBirthdayInfo);
-} catch (e) {
-  console.log(e);
-}
-try {
-  const sameBirthdayInfo = await authors.sameBirthday();
-  console.log(sameBirthdayInfo);
-} catch (e) {
-  console.log(e);
-}
+// //sameBirthday
+// try {
+//   const sameBirthdayInfo = await authors.sameBirthday(10, 12);
+//   console.log(sameBirthdayInfo);
+// } catch (e) {
+//   console.log(e);
+// }
+// try {
+//   const sameBirthdayInfo = await authors.sameBirthday(9, 31);
+//   console.log(sameBirthdayInfo);
+// } catch (e) {
+//   console.log(e);
+// }
+// try {
+//   const sameBirthdayInfo = await authors.sameBirthday(13, 25);
+//   console.log(sameBirthdayInfo);
+// } catch (e) {
+//   console.log(e);
+// }
+// try {
+//   const sameBirthdayInfo = await authors.sameBirthday(2, 30);
+//   console.log(sameBirthdayInfo);
+// } catch (e) {
+//   console.log(e);
+// }
+// try {
+//   const sameBirthdayInfo = await authors.sameBirthday("09", "31");
+//   console.log(sameBirthdayInfo);
+// } catch (e) {
+//   console.log(e);
+// }
+// try {
+//   const sameBirthdayInfo = await authors.sameBirthday();
+//   console.log(sameBirthdayInfo);
+// } catch (e) {
+//   console.log(e);
+// }
 
-//books
-//getBookById
-try {
-  const getBookByIdInfo = await books.getBookById(
-    "99875ad8-a1d3-42ea-8d7b-5ac4cd4edb9e"
-  );
-  console.log(getBookByIdInfo);
-} catch (e) {
-  console.log(e);
-}
-try {
-  const getBookByIdInfo = await books.getBookById(-1);
-  console.log(getBookByIdInfo);
-} catch (e) {
-  console.log(e);
-}
-try {
-  const getBookByIdInfo = await books.getBookById(1001);
-  console.log(getBookByIdInfo);
-} catch (e) {
-  console.log(e);
-}
-try {
-  const getBookByIdInfo = await books.getBookById();
-  console.log(getBookByIdInfo);
-} catch (e) {
-  console.log(e);
-}
-try {
-  const getBookByIdInfo = await books.getBookById(
-    "7989fa5e-5617-43f7-a931-46036f9dbcff"
-  );
-  console.log(getBookByIdInfo);
-} catch (e) {
-  console.log(e);
-}
+// //books
+// //getBookById
+// try {
+//   const getBookByIdInfo = await books.getBookById(
+//     "99875ad8-a1d3-42ea-8d7b-5ac4cd4edb9e"
+//   );
+//   console.log(getBookByIdInfo);
+// } catch (e) {
+//   console.log(e);
+// }
+// try {
+//   const getBookByIdInfo = await books.getBookById(-1);
+//   console.log(getBookByIdInfo);
+// } catch (e) {
+//   console.log(e);
+// }
+// try {
+//   const getBookByIdInfo = await books.getBookById(1001);
+//   console.log(getBookByIdInfo);
+// } catch (e) {
+//   console.log(e);
+// }
+// try {
+//   const getBookByIdInfo = await books.getBookById();
+//   console.log(getBookByIdInfo);
+// } catch (e) {
+//   console.log(e);
+// }
+// try {
+//   const getBookByIdInfo = await books.getBookById(
+//     "7989fa5e-5617-43f7-a931-46036f9dbcff"
+//   );
+//   console.log(getBookByIdInfo);
+// } catch (e) {
+//   console.log(e);
+// }
 
-//getAuthorName
-try {
-  const getAuthorNameInfo = await books.getAuthorName(
-    "99875ad8-a1d3-42ea-8d7b-5ac4cd4edb9e"
-  );
-  console.log(getAuthorNameInfo);
-} catch (e) {
-  console.log(e);
-}
-try {
-  const getAuthorNameInfo = await books.getAuthorName(-1);
-  console.log(getAuthorNameInfo);
-} catch (e) {
-  console.log(e);
-}
-try {
-  const getAuthorNameInfo = await books.getAuthorName();
-  console.log(getAuthorNameInfo);
-} catch (e) {
-  console.log(e);
-}
-try {
-  const getAuthorNameInfo = await books.getAuthorName(
-    "7989fa5e-5617-43f7-a931-46036f9dbcff"
-  );
-  console.log(getAuthorNameInfo);
-} catch (e) {
-  console.log(e);
-}
+// //getAuthorName
+// try {
+//   const getAuthorNameInfo = await books.getAuthorName(
+//     "99875ad8-a1d3-42ea-8d7b-5ac4cd4edb9e"
+//   );
+//   console.log(getAuthorNameInfo);
+// } catch (e) {
+//   console.log(e);
+// }
+// try {
+//   const getAuthorNameInfo = await books.getAuthorName(-1);
+//   console.log(getAuthorNameInfo);
+// } catch (e) {
+//   console.log(e);
+// }
+// try {
+//   const getAuthorNameInfo = await books.getAuthorName();
+//   console.log(getAuthorNameInfo);
+// } catch (e) {
+//   console.log(e);
+// }
+// try {
+//   const getAuthorNameInfo = await books.getAuthorName(
+//     "7989fa5e-5617-43f7-a931-46036f9dbcff"
+//   );
+//   console.log(getAuthorNameInfo);
+// } catch (e) {
+//   console.log(e);
+// }
 
-//sameGenre
-try {
-  const sameGenreInfo = await books.sameGenre(
-    "99875ad8-a1d3-42ea-8d7b-5ac4cd4edb9e"
-  );
-  console.log(sameGenreInfo);
-} catch (e) {
-  console.log(e);
-}
-try {
-  const sameGenreInfo = await books.sameGenre(-1);
-  console.log(sameGenreInfo);
-} catch (e) {
-  console.log(e);
-}
-try {
-  const sameGenreInfo = await books.sameGenre(1001);
-  console.log(sameGenreInfo);
-} catch (e) {
-  console.log(e);
-}
-try {
-  const sameGenreInfo = await books.sameGenre();
-  console.log(sameGenreInfo);
-} catch (e) {
-  console.log(e);
-}
-try {
-  const sameGenreInfo = await books.sameGenre(false);
-  console.log(sameGenreInfo);
-} catch (e) {
-  console.log(e);
-}
-try {
-  const sameGenreInfo = await books.sameGenre("foo bar");
-  console.log(sameGenreInfo);
-} catch (e) {
-  console.log(e);
-}
+// //sameGenre
+// try {
+//   const sameGenreInfo = await books.sameGenre(
+//     "99875ad8-a1d3-42ea-8d7b-5ac4cd4edb9e"
+//   );
+//   console.log(sameGenreInfo);
+// } catch (e) {
+//   console.log(e);
+// }
+// try {
+//   const sameGenreInfo = await books.sameGenre(-1);
+//   console.log(sameGenreInfo);
+// } catch (e) {
+//   console.log(e);
+// }
+// try {
+//   const sameGenreInfo = await books.sameGenre(1001);
+//   console.log(sameGenreInfo);
+// } catch (e) {
+//   console.log(e);
+// }
+// try {
+//   const sameGenreInfo = await books.sameGenre();
+//   console.log(sameGenreInfo);
+// } catch (e) {
+//   console.log(e);
+// }
+// try {
+//   const sameGenreInfo = await books.sameGenre(false);
+//   console.log(sameGenreInfo);
+// } catch (e) {
+//   console.log(e);
+// }
+// try {
+//   const sameGenreInfo = await books.sameGenre("foo bar");
+//   console.log(sameGenreInfo);
+// } catch (e) {
+//   console.log(e);
+// }
 
-//priceRange
+// //priceRange
 
-try {
-  const priceRangeInfo = await books.priceRange(5.99, 30);
-  console.log(priceRangeInfo);
-} catch (e) {
-  console.log(e);
-}
-try {
-  const priceRangeInfo = await books.priceRange("foo", 13);
-  console.log(priceRangeInfo);
-} catch (e) {
-  console.log(e);
-}
-try {
-  const priceRangeInfo = await books.priceRange(5, 3);
-  console.log(priceRangeInfo);
-} catch (e) {
-  console.log(e);
-}
-try {
-  const priceRangeInfo = await books.priceRange(-5, 3);
-  console.log(priceRangeInfo);
-} catch (e) {
-  console.log(e);
-}
-try {
-  const priceRangeInfo = await books.priceRange();
-  console.log(priceRangeInfo);
-} catch (e) {
-  console.log(e);
-}
+// try {
+//   const priceRangeInfo = await books.priceRange(5.99, 30);
+//   console.log(priceRangeInfo);
+// } catch (e) {
+//   console.log(e);
+// }
+// try {
+//   const priceRangeInfo = await books.priceRange("foo", 13);
+//   console.log(priceRangeInfo);
+// } catch (e) {
+//   console.log(e);
+// }
+// try {
+//   const priceRangeInfo = await books.priceRange(5, 3);
+//   console.log(priceRangeInfo);
+// } catch (e) {
+//   console.log(e);
+// }
+// try {
+//   const priceRangeInfo = await books.priceRange(-5, 3);
+//   console.log(priceRangeInfo);
+// } catch (e) {
+//   console.log(e);
+// }
+// try {
+//   const priceRangeInfo = await books.priceRange();
+//   console.log(priceRangeInfo);
+// } catch (e) {
+//   console.log(e);
+// }
 
-try {
-  const getAllBooksWithAuthorNameInfo = await books.getAllBooksWithAuthorName();
-  console.log(getAllBooksWithAuthorNameInfo);
-} catch (e) {
-  console.log(e);
-}
+// try {
+//   const getAllBooksWithAuthorNameInfo = await books.getAllBooksWithAuthorName();
+//   console.log(getAllBooksWithAuthorNameInfo);
+// } catch (e) {
+//   console.log(e);
+// }

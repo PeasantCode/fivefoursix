@@ -1,24 +1,15 @@
-const merge = (word1, word2) => {
-  const word1Len = word1.length;
-  const word2Len = word2.length;
-  let minLen;
-  let maxLen;
-  let res = "";
-  if (word1Len < word2Len) {
-    minLen = word1Len;
-    maxLen = word2Len;
-  } else {
-    minLen = word2Len;
-    maxLen = word1Len;
+var kidsWithCandies = function (candies, extraCandies) {
+  const combine = candies.map(
+    (eachCandy) => (eachCandy = eachCandy + extraCandies)
+  );
+  const res = [];
+  for (let i = 0; i < candies.length; i++) {
+    const a = candies.filter((ele) => combine[i] < ele);
+    if (a.length !== 0) res.push(false);
+    else res.push(true);
   }
-  for (let i = 0; i < minLen; i++) {
-    res += word1[i];
-    res += word2[i];
-  }
-  if (minLen === word1Len) {
-    res += word2.slice(minLen);
-  }
-  res += word1.slice(minLen);
   return res;
 };
-console.log(merge("ab", "pqrs"));
+
+console.log(kidsWithCandies([2, 3, 5, 1, 3], 3));
+[5, 6, 8, 4, 6];
