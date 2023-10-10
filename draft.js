@@ -1,8 +1,6 @@
-const a =() => {
-  b()
-}
-const b =() => {
-  console.log("b");
-}
-
-console.log(a());
+const a = [1, 5, 5, 6, 8, 78];
+console.log(
+  a.map((b) => {
+    b = b + 1;
+  })
+);
