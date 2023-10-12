@@ -190,8 +190,6 @@ export const rename = async (id, newEventName) => {
   if (!targetEvent) throw "the event with this id does not exist";
   if (targetEvent.eventName === newEventName)
     throw "the newEventName is same as original eventName";
-  const ifExist = await eventsCollection.findOne({ eventName: newEventName });
-  if (ifExist) throw `${newEventName}`;
   const renameInfo = await eventsCollection.findOneAndUpdate(
     { _id: new ObjectId(id) },
     { $set: { eventName: newEventName } },
