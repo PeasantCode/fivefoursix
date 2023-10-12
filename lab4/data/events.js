@@ -199,3 +199,5 @@ export const rename = async (id, newEventName) => {
   renameInfo._id = renameInfo._id.toString();
   return renameInfo;
 };
+
+/* test */
