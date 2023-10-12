@@ -3,8 +3,8 @@ import { events } from "../config/mongoCollections.js";
 import { ObjectId } from "mongodb";
 import {
   checkString,
-  isValidDate,
-  checkValidTime,
+  checkDate,
+  checkTime,
   timeToMinutes,
 } from "../helpers.js";
 
@@ -35,14 +35,11 @@ export const create = async (
 
   eventDescription = checkString(eventDescription, "eventDescription");
   contactEmail = checkString(contactEmail, "contactEmail");
-  eventDate = checkString(eventDate, "eventDate");
-  startTime = checkString(startTime, "startTime");
-  endTime = checkString(endTime, "endTime");
-  isValidDate(eventDate, "eventDate");
+  eventDate = checkDate(eventDate, "eventDate");
   if (new Date(eventDate) - new Date() < 0)
     throw "eventTime must be greater than the current date";
-  checkValidTime(startTime, "startTime");
-  checkValidTime(endTime, "endTime");
+  startTime = checkTime(startTime, "startTime");
+  endTime = checkTime(endTime, "endTime");
   const startTimeMins = timeToMinutes(startTime);
   const endTimeMins = timeToMinutes(endTime);
   if (endTimeMins - startTimeMins < 0)
@@ -151,17 +148,15 @@ export const create = async (
   return await get(insertInfo.insertedId.toString());
 };
 
-
 export const getAll = async () => {
   const eventsCollection = await events();
   const allObjIdEvents = await eventsCollection.find().toArray();
   const allEvents = allObjIdEvents.map((event) => {
     event._id = event._id.toString();
     return event;
-  })
+  });
   return allEvents;
 };
-
 
 export const get = async (id) => {
   id = checkString(id, "id");
@@ -208,5 +203,3 @@ export const rename = async (id, newEventName) => {
   renameInfo._id = renameInfo._id.toString();
   return renameInfo;
 };
-
-
