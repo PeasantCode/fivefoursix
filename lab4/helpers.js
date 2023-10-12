@@ -36,7 +36,7 @@ export const checkTime = (time, whatTime) => {
 export const timeToMinutes = (time) => {
   const part = time.split(":");
   let hours = +part[0],
-    mins;
+    mins = 0;
   if (time.includes("PM")) {
     hours += 12;
     mins = +part[1].split("P")[0];

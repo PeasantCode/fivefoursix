@@ -26,8 +26,7 @@ export const create = async (
     throw "priceOfAdmission is required";
   if (publicEvent === undefined) throw "publicEvent is required";
   eventName = checkString(eventName, "eventName");
-  if (eventName.length < 5)
-    throw "the length of eventName must longer than 5";
+  if (eventName.length < 5) throw "the length of eventName must longer than 5";
   if (eventDescription.length < 25)
     throw "the eventDescription must have at least 25 characters";
   if (!contactEmail.match(/^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/))
@@ -48,7 +47,7 @@ export const create = async (
   if (endTimeMins - startTimeMins < 30)
     throw "the events time at least last 30 minutes";
 
-  if (publicEvent !== false && publicEvent !== true)
+  if (typeof publicEvent !== "boolean")
     throw "the value of publicEvent must be boolean false or true";
   if (typeof maxCapacity !== "number")
     throw "the type of maxCapacity must be number";
@@ -63,17 +62,16 @@ export const create = async (
   )
     throw "the length of priceOfAdmission cannot longer than two decimal place";
   if (typeof eventLocation !== "object" || Array.isArray(eventDescription))
-    throw "the type of eventLocation must be string";
+    throw "the type of eventLocation must be object";
   let { streetAddress, city, state, zip } = eventLocation;
   if (!streetAddress) throw "streetAddress are not supplied";
   streetAddress = checkString(streetAddress, "streetAddress");
   city = checkString(city, "city");
   state = checkString(state, "state");
   zip = checkString(zip, "zip");
-  if (!streetAddress.match(/[a-z]{3,}/gi))
-    throw "streetAddress must be more than or equal to 3 characters";
-  if (!city.match(/[a-z]{3,}/gi))
-    throw "city must be more than or equal to 3 characters";
+  if (!streetAddress.length < 3)
+    throw "streetAddress must have at least 3 characters";
+  if (!city.match(/[a-z]{3,}/gi)) throw "city must have at least 3 characters";
   const usStateAbbreviations = [
     "AL",
     "AK",
