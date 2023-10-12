@@ -26,9 +26,9 @@ export const create = async (
     throw "priceOfAdmission is required";
   if (publicEvent === undefined) throw "publicEvent is required";
   eventName = checkString(eventName, "eventName");
-  if (eventName.match(/[a-z]/gi).length < 5)
+  if (eventName.length < 5)
     throw "the length of eventName must longer than 5";
-  if (eventDescription.match(/[a-z]/gi).length < 25)
+  if (eventDescription.length < 25)
     throw "the eventDescription must have at least 25 characters";
   if (!contactEmail.match(/^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/))
     throw "the contactEmail is invalid";
