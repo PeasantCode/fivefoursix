@@ -70,7 +70,7 @@ export const create = async (
   city = checkString(city, "city");
   state = checkString(state, "state");
   zip = checkString(zip, "zip");
-  if (!streetAddress.length < 3)
+  if (streetAddress.length < 3)
     throw "streetAddress must have at least 3 characters";
   if (!city.match(/[a-z]{3,}/gi)) throw "city must have at least 3 characters";
   const usStateAbbreviations = [
@@ -147,6 +147,7 @@ export const create = async (
   return await get(insertInfo.insertedId.toString());
 };
 
+
 export const getAll = async () => {
   const eventsCollection = await events();
   const allObjIdEvents = await eventsCollection.find().toArray();
@@ -157,12 +158,13 @@ export const getAll = async () => {
   return allEvents;
 };
 
+
 export const get = async (id) => {
   id = checkString(id, "id");
   if (!ObjectId.isValid(id)) throw "the id is not valid!";
   const eventsCollection = await events();
   const eventsInfo = await eventsCollection.findOne({ _id: new ObjectId(id) });
-  if (!eventsInfo) throw "the event with this id is not exist";
+  if (!eventsInfo) throw "the event with this id does not exist";
   eventsInfo._id = eventsInfo._id.toString();
   return eventsInfo;
 };
