@@ -147,7 +147,6 @@ export const create = async (
   return await get(insertInfo.insertedId.toString());
 };
 
-
 export const getAll = async () => {
   const eventsCollection = await events();
   const allObjIdEvents = await eventsCollection.find().toArray();
@@ -157,7 +156,6 @@ export const getAll = async () => {
   });
   return allEvents;
 };
-
 
 export const get = async (id) => {
   id = checkString(id, "id");
@@ -192,7 +190,7 @@ export const rename = async (id, newEventName) => {
   const targetEvent = await eventsCollection.findOne({ _id: new ObjectId(id) });
   if (!targetEvent) throw "the event with this id does not exist";
   if (targetEvent.eventName === newEventName)
-    throw "the newEventName is same as original eventName";
+    throw "the newEventName cannot be same as original eventName";
   const renameInfo = await eventsCollection.findOneAndUpdate(
     { _id: new ObjectId(id) },
     { $set: { eventName: newEventName } },

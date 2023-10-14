@@ -18,6 +18,7 @@
 
 import { create, get, getAll, rename, remove } from "./data/events.js";
 import { dbConnection, closeConnection } from "./config/mongoConnection.js";
+import { ObjectId } from "mongodb";
 
 const db = await dbConnection();
 await db.dropDatabase();
@@ -160,28 +161,25 @@ try {
 }
 //12. Try to remove an event that does not exist to make sure it throws errors.
 try {
-  await remove("6525a5d575a06a530c9c61bd");
+  await remove(new ObjectId());
 } catch (e) {
   console.log({ error: e });
 }
 //13. Try to rename an event that does not exist to make sure it throws errors.
 try {
-  await rename("6525a5d575a06a530c9c61bd", "aaaaaaaaaa");
+  await rename(new ObjectId(), "aaaaaaaaaa");
 } catch (e) {
   console.log({ error: e });
 }
 //14. Try to rename an event passing in invalid data for the newEventName parameter to make sure it throws errors.
 try {
-  await rename(
-    firstEventId,
-    "Patrick's Small Start of Fall QBB"
-  );
+  await rename(firstEventId, "Patrick's Small Start of Fall QBB");
 } catch (e) {
   console.log({ error: e });
 }
 //15. Try getting an event by ID that does not exist to make sure it throws errors.
 try {
-  await get("6525a6532ef515f46cf40691");
+  await get(new ObjectId());
 } catch (e) {
   console.log({ error: e });
 }
