@@ -157,30 +157,30 @@ try {
   ];
   await create(...badNameEvent);
 } catch (e) {
-  console.log({ error: e });
+  console.log(e);
 }
 //12. Try to remove an event that does not exist to make sure it throws errors.
 try {
   await remove(new ObjectId());
 } catch (e) {
-  console.log({ error: e });
+  console.log(e);
 }
 //13. Try to rename an event that does not exist to make sure it throws errors.
 try {
   await rename(new ObjectId(), "aaaaaaaaaa");
 } catch (e) {
-  console.log({ error: e });
+  console.log(e);
 }
 //14. Try to rename an event passing in invalid data for the newEventName parameter to make sure it throws errors.
 try {
   await rename(firstEventId, "Patrick's Small Start of Fall QBB");
 } catch (e) {
-  console.log({ error: e });
+  console.log(e);
 }
 //15. Try getting an event by ID that does not exist to make sure it throws errors.
 try {
   await get(new ObjectId());
 } catch (e) {
-  console.log({ error: e });
+  console.log(e);
 }
 await closeConnection();
