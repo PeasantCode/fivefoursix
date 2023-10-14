@@ -174,7 +174,7 @@ try {
 try {
   await rename(
     firstEventId,
-    "Patrick's orientation for new students"
+    "Patrick's Small Start of Fall QBB"
   );
 } catch (e) {
   console.log({ error: e });
