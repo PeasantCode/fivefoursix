@@ -20,12 +20,12 @@ import { create, get, getAll, rename, remove } from "./data/events.js";
 import { dbConnection, closeConnection } from "./config/mongoConnection.js";
 
 const db = await dbConnection();
-// await db.dropDatabase();
+await db.dropDatabase();
 
 /* 1. Create a event of your choice.
    2. Log the newly created event. (Just that event, not all events)
 */
-
+let firstEventId, secondEventId;
 try {
   const firstEvent = [
     "Patrick's Big End of Summer BBQ",
@@ -45,6 +45,7 @@ try {
     false,
   ];
   const event = await create(...firstEvent);
+  firstEventId = event._id;
   console.log("This is firstEvent:");
   console.log(event);
 } catch (e) {
@@ -70,7 +71,8 @@ try {
     "10:00PM",
     false,
   ];
-  await create(...secondEvent);
+  const event = await create(...secondEvent);
+  secondEventId = event._id;
 } catch (e) {
   console.log({ error: e });
 }
@@ -114,9 +116,9 @@ try {
 /*  7. Rename the first event
     8. Log the first event with the updated name. */
 try {
-  await rename("65259b84f384a21747df50a3", "Patrick's Small Start of Fall QBB");
+  await rename(firstEventId, "Patrick's Small Start of Fall QBB");
   console.log("This is rename event:");
-  console.log(await get("65259b84f384a21747df50a3"));
+  console.log(await get(firstEventId));
 } catch (e) {
   console.log({ error: e });
 }
@@ -126,7 +128,7 @@ try {
     10. Query all events, and log them all
 */
 try {
-  await remove("65259b84f384a21747df50a4");
+  await remove(secondEventId);
   console.log("These are all events after removing second event:");
   console.log(await getAll());
 } catch (e) {
@@ -158,26 +160,29 @@ try {
 }
 //12. Try to remove an event that does not exist to make sure it throws errors.
 try {
-    await remove('6525a5d575a06a530c9c61bd');
+  await remove("6525a5d575a06a530c9c61bd");
 } catch (e) {
-    console.log({ error: e });
+  console.log({ error: e });
 }
 //13. Try to rename an event that does not exist to make sure it throws errors.
 try {
-    await rename('6525a5d575a06a530c9c61bd',"aaaaaaaaaa")
+  await rename("6525a5d575a06a530c9c61bd", "aaaaaaaaaa");
 } catch (e) {
-    console.log({ error: e });
+  console.log({ error: e });
 }
 //14. Try to rename an event passing in invalid data for the newEventName parameter to make sure it throws errors.
 try {
-   await rename("6525a6532ef515f46cf40641","Patrick's orientation for new students");
+  await rename(
+    "6525a6532ef515f46cf40641",
+    "Patrick's orientation for new students"
+  );
 } catch (e) {
-    console.log({ error: e });
+  console.log({ error: e });
 }
 //15. Try getting an event by ID that does not exist to make sure it throws errors.
 try {
-    await get("6525a6532ef515f46cf40691")   
+  await get("6525a6532ef515f46cf40691");
 } catch (e) {
-    console.log({ error: e });
+  console.log({ error: e });
 }
 await closeConnection();
