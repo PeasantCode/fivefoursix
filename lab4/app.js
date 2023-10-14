@@ -173,7 +173,7 @@ try {
 //14. Try to rename an event passing in invalid data for the newEventName parameter to make sure it throws errors.
 try {
   await rename(
-    "6525a6532ef515f46cf40641",
+    firstEventId,
     "Patrick's orientation for new students"
   );
 } catch (e) {
