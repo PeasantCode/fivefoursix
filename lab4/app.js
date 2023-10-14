@@ -25,6 +25,7 @@ const db = await dbConnection();
 /* 1. Create a event of your choice.
    2. Log the newly created event. (Just that event, not all events)
 */
+
 try {
   const firstEvent = [
     "Patrick's Big End of Summer BBQ",

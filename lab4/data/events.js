@@ -49,6 +49,7 @@ export const create = async (
 
   if (typeof publicEvent !== "boolean")
     throw "the value of publicEvent must be boolean false or true";
+  if ((maxCapacity * 100) % 100) throw "maxCapacity must be integer";
   if (typeof maxCapacity !== "number")
     throw "the type of maxCapacity must be number";
   if (typeof priceOfAdmission !== "number")

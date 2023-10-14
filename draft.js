@@ -1,2 +1,5 @@
-const a = 'sdaf15321'
-console.log(a.length);
+ const b = (a) => {
+   if(a*100%100) throw 'youyushu'
+ }
+console.log(b(125.0));
+
