@@ -26,7 +26,6 @@ export const getBookById = async (id) => {
   id = checkString(id, "id");
   const booksData = await getBooksData();
   const book = booksData.find((ele) => ele.id === id);
-  console.log(book);
   if (!book) throw "book not found";
   return book;
 };
