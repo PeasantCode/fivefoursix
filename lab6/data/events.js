@@ -156,10 +156,22 @@ export const getAll = async () => {
   //Implement Code here
   const eventsCollection = await events();
   const allObjIdEvents = await eventsCollection.find().toArray();
-  const allEvents = allObjIdEvents.map((event) => ({
-    _id: event._id.toString(),
-    eventName: event.eventName,
-  }));
+  // const allEvents = allObjIdEvents.map((event) => ({
+  //   _id: event._id.toString(),
+  //   eventName: event.eventName,
+  // }));
+  const allEvents = allObjIdEvents
+    .map((event) => {
+      if (!event._id) {
+        console.log("Missing _id:", event);
+        return null;
+      }
+      return {
+        _id: event._id.toString(),
+        eventName: event.eventName,
+      };
+    })
+    .filter((e) => e);
   return allEvents;
 };
 
@@ -205,7 +217,7 @@ export const update = async (
 ) => {
   //Implement Code here
   const id = checkString(eventId, "eventId");
-  if (!ObjectId.isValid(eventId)) throw "the eventId is not valid!";
+  if (!ObjectId.isValid(eventId)) throw "the eventId is invalid";
   if (!eventLocation) throw "eventLocation is required";
   if (!maxCapacity) throw "maxCapacity is required";
   if (!priceOfAdmission && priceOfAdmission !== 0)
@@ -213,13 +225,13 @@ export const update = async (
   if (publicEvent === undefined) throw "publicEvent is required";
   eventName = checkString(eventName, "eventName");
   if (eventName.length < 5) throw "the length of eventName must longer than 5";
+  eventDescription = checkString(eventDescription, "eventDescription");
   if (eventDescription.length < 25)
     throw "the eventDescription must have at least 25 characters";
+  contactEmail = checkString(contactEmail, "contactEmail");
   if (!contactEmail.match(/^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/))
     throw "the contactEmail is invalid";
 
-  eventDescription = checkString(eventDescription, "eventDescription");
-  contactEmail = checkString(contactEmail, "contactEmail");
   eventDate = checkDate(eventDate, "eventDate");
   if (new Date(eventDate) - new Date() < 0)
     throw "eventTime must be greater than the current date";
@@ -329,7 +341,7 @@ export const update = async (
     {
       $set: {
         eventName,
-        eventDescription,
+        description: eventDescription,
         eventLocation,
         contactEmail,
         maxCapacity,
@@ -342,7 +354,6 @@ export const update = async (
     },
     { returnDocument: "after" }
   );
-  console.log(updateInfo);
   if (!updateInfo) throw "update failed";
   return updateInfo;
 };

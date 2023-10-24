@@ -22,12 +22,12 @@ export const createAttendee = async (
     _id: new ObjectId(eventId),
   });
   if (!targetEvent) throw "the event with eventId does not exist";
-  if (!contactEmail.match(/^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/))
-    throw "the contactEmail is invalid";
+  if (!emailAddress.match(/^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/))
+    throw "the emailAddress is invalid";
   const oriAttendees = targetEvent.attendees;
   if (oriAttendees.length === targetEvent.maxCapacity)
     throw "the event has reached its maximum capacity and no new participants can be added";
-  const ifExist = oriAttendees.find((ele) => ele.includes(emailAddress));
+  const ifExist = oriAttendees.find((ele) => ele.emailAddress === emailAddress);
   if (ifExist) throw "this attender is already on the list ";
   const eventAfterAddAtt = await eventsCollection.findOneAndUpdate(
     { _id: new ObjectId(eventId) },
@@ -35,11 +35,11 @@ export const createAttendee = async (
       $push: {
         attendees: { _id: new ObjectId(), firstName, lastName, emailAddress },
       },
-      $set: { totalNumberOfAttendees: oriAttendees.totalNumberOfAttendees + 1 },
+      $set: { totalNumberOfAttendees: targetEvent.totalNumberOfAttendees + 1 },
     },
     { returnDocument: "after" }
   );
-  if (!eventAfterAddAtt) throw "creating new one attender failed";
+  if (!eventAfterAddAtt) throw "creating a new attender failed";
   return await get(eventId);
 };
 
@@ -64,10 +64,7 @@ export const getAttendee = async (attendeeId) => {
     attendees: { $elemMatch: { _id: new ObjectId(attendeeId) } },
   });
   if (!targetEvent) throw "the attendee with attendeeId does not exist";
-  return targetEvent.attendees.map((ele) => {
-    const _id = ele._id.toString();
-    if (_id === ele) return ele;
-  });
+  return targetEvent.attendees.find((ele) => ele._id.toString() === attendeeId);
 };
 
 export const removeAttendee = async (attendeeId) => {
@@ -80,11 +77,12 @@ export const removeAttendee = async (attendeeId) => {
   });
   if (!targetEvent) throw "the attendee with attendeeId does not exist";
   const deleteInfo = await eventsCollection.findOneAndUpdate(
-    { _id: new ObjectId(attendeeId) },
+    { _id: new ObjectId(targetEvent._id) },
     {
       $pull: { attendees: { _id: new ObjectId(attendeeId) } },
       $set: { totalNumberOfAttendees: targetEvent.totalNumberOfAttendees - 1 },
-    }
+    },
+    { returnDocument: "after" }
   );
   if (!deleteInfo) throw "deleting failed";
   return deleteInfo;

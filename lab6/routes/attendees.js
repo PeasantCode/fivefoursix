@@ -38,13 +38,12 @@ attendeesRouter
   .post(async (req, res) => {
     //code here for POST
     const eventId = req.params.eventId;
-
+    const data = req.body;
+    let { firstName, lastName, emailAddress } = data;
     try {
       const id = checkString(eventId, "eventId");
       if (!ObjectId.isValid(eventId)) throw "the eventId is invalid";
-      const data = req.body;
       if (!data) throw "input is required";
-      let { firstName, lastName, emailAddress } = data;
       firstName = checkString(firstName, "firstName");
       lastName = checkString(lastName, "lastName");
       emailAddress = checkString(emailAddress, "emailAddress");
@@ -94,7 +93,7 @@ attendeesRouter
       const targetAttendee = await getAttendee(attendeeId);
       return res.status(200).json(targetAttendee);
     } catch (e) {
-      return res.json({ error: e });
+      return res.json("getAttendee failed");
     }
   })
   .delete(async (req, res) => {

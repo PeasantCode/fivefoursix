@@ -22,7 +22,8 @@ eventsRouter
       }));
       return res.json(allEvents);
     } catch (e) {
-      return res.status(404).json({ error: e.message });
+      console.log(e);
+      return res.status(404).json({ error: e });
     }
   })
   .post(async (req, res) => {
@@ -32,7 +33,7 @@ eventsRouter
       if (!data) throw "input is required";
       let {
         eventName,
-        eventDescription,
+        description: eventDescription,
         eventLocation,
         contactEmail,
         maxCapacity,
@@ -50,15 +51,15 @@ eventsRouter
       eventName = checkString(eventName, "eventName");
       if (eventName.length < 5)
         throw "the length of eventName must longer than 5";
+      eventDescription = checkString(eventDescription, "eventDescription");
       if (eventDescription.length < 25)
         throw "the eventDescription must have at least 25 characters";
+      contactEmail = checkString(contactEmail, "contactEmail");
       if (
         !contactEmail.match(/^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/)
       )
         throw "the contactEmail is invalid";
 
-      eventDescription = checkString(eventDescription, "eventDescription");
-      contactEmail = checkString(contactEmail, "contactEmail");
       eventDate = checkDate(eventDate, "eventDate");
       if (new Date(eventDate) - new Date() < 0)
         throw "eventTime must be greater than the current date";
@@ -170,7 +171,7 @@ eventsRouter
       );
       return res.status(200).json(newEvent);
     } catch (e) {
-      return res.status(400).json({ error: e.message });
+      return res.status(400).json({ error: e });
     }
   });
 
@@ -183,14 +184,14 @@ eventsRouter
       const id = checkString(eventId, "eventId");
       if (!ObjectId.isValid(eventId)) throw "the eventId is not valid!";
     } catch (e) {
-      return res.status(400).json({ error: e.message });
+      return res.status(400).json({ error: e });
     }
 
     try {
       const eventsInfo = await get(eventId);
       if (!eventsInfo) throw "the event with this eventId does not exist";
     } catch (e) {
-      return res.status(404).json({ error: e.message });
+      return res.status(404).json({ error: e });
     }
     try {
       const eventsInfo = await get(eventId);
@@ -204,21 +205,21 @@ eventsRouter
       const id = checkString(eventId, "eventId");
       if (!ObjectId.isValid(eventId)) throw "the eventId is not valid!";
     } catch (e) {
-      return res.status(400).json({ error: e.message });
+      return res.status(400).json({ error: e });
     }
 
     try {
       const eventsInfo = await get(eventId);
       if (!eventsInfo) throw "the event with this eventId does not exist";
     } catch (e) {
-      return res.status(404).json({ error: e.message });
+      return res.status(404).json({ error: e });
     }
     try {
       const deleteInfo = await remove(eventId);
       if (!deleteInfo) throw "delete failed";
       return res.status(200).json(deleteInfo);
     } catch (e) {
-      return res.json({ error: e.message });
+      return res.json({ error: e });
     }
   })
   .put(async (req, res) => {
@@ -230,19 +231,19 @@ eventsRouter
       const id = checkString(eventId, "eventId");
       if (!ObjectId.isValid(eventId)) throw "the eventId is invalid";
     } catch (e) {
-      return res.status(400).json({ error: e.message });
+      return res.status(400).json({ error: e });
     }
     try {
       const targetEvent = await get(eventId);
       if (!targetEvent) throw "the event with eventId does not exist";
     } catch (e) {
-      return res.status(404).json({ error: e.message });
+      return res.status(404).json({ error: e });
     }
     try {
       if (!data) throw "input is required";
       let {
         eventName,
-        eventDescription,
+        description: eventDescription,
         eventLocation,
         contactEmail,
         maxCapacity,
@@ -260,15 +261,15 @@ eventsRouter
       eventName = checkString(eventName, "eventName");
       if (eventName.length < 5)
         throw "the length of eventName must longer than 5";
+      eventDescription = checkString(eventDescription, "eventDescription");
       if (eventDescription.length < 25)
         throw "the eventDescription must have at least 25 characters";
+      contactEmail = checkString(contactEmail, "contactEmail");
       if (
         !contactEmail.match(/^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/)
       )
         throw "the contactEmail is invalid";
 
-      eventDescription = checkString(eventDescription, "eventDescription");
-      contactEmail = checkString(contactEmail, "contactEmail");
       eventDate = checkDate(eventDate, "eventDate");
       if (new Date(eventDate) - new Date() < 0)
         throw "eventTime must be greater than the current date";
@@ -370,6 +371,7 @@ eventsRouter
         throw "state must be a valid state abbreviation";
       if (!zip.match(/^[0-9]{5}$/gi)) throw "zip must consist of five numbers";
       const newEvent = await update(
+        eventId,
         eventName,
         eventDescription,
         eventLocation,
@@ -385,6 +387,6 @@ eventsRouter
       );
       return res.status(200).json(newEvent);
     } catch (e) {
-      return res.status(400).json({ error: e.message });
+      return res.status(400).json({ error: e });
     }
   });
