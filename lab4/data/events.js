@@ -49,9 +49,11 @@ export const create = async (
 
   if (typeof publicEvent !== "boolean")
     throw "the value of publicEvent must be boolean false or true";
-  if ((maxCapacity * 100) % 100) throw "maxCapacity must be integer";
+
   if (typeof maxCapacity !== "number")
     throw "the type of maxCapacity must be number";
+  if (maxCapacity % 1) throw "maxCapacity must be integer";
+
   if (typeof priceOfAdmission !== "number")
     throw "the type of priceOfAdmission must be number";
   if (maxCapacity <= 0) throw "maxCapacity must larger than 0";
@@ -131,7 +133,7 @@ export const create = async (
   if (!zip.match(/^[0-9]{5}$/gi)) throw "zip must consist of five numbers";
   const newEvent = {
     eventName,
-    eventDescription,
+    description: eventDescription,
     eventLocation,
     contactEmail,
     maxCapacity,
@@ -146,6 +148,8 @@ export const create = async (
   if (insertInfo.acknowledged !== true) throw "create failed";
   return await get(insertInfo.insertedId.toString());
 };
+
+
 
 export const getAll = async () => {
   const eventsCollection = await events();
@@ -201,4 +205,3 @@ export const rename = async (id, newEventName) => {
   return renameInfo;
 };
 
-/* test */

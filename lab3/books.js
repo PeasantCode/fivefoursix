@@ -6,12 +6,13 @@ import { checkString, checkNumber, getBooksData } from "./helpers.js";
 export const getBookById = async (id) => {
   id = checkString(id, "id");
   const booksData = await getBooksData();
-  const book = booksData.find((ele) => (ele.id = id));
+  const book = booksData.find((ele) => ele.id === id);
+  console.log(book);
   if (!book) throw "book not found";
   return book;
 };
 
-// console.log(await getBookById("99875ad8-a1d3-42ea-8d7b-5ac4cd4edb9e"));
+// console.log(await getBookById("9169d64a-6ca0-47b9-b532-e1d7ca8383f1"));
 
 export const getAuthorName = async (bookId) => {
   bookId = checkString(bookId, "bookId");

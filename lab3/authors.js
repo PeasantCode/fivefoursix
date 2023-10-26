@@ -42,7 +42,7 @@ export const searchAuthorByName = async (searchTerm) => {
     return lastName1.localeCompare(lastName2);
   });
 };
-console.log(await searchAuthorByName("Tom"));
+// console.log(await searchAuthorByName("Tom"));
 // console.log(await searchAuthorByName("foobar"));
 
 export const getBookNames = async (firstName, lastName) => {

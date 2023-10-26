@@ -177,7 +177,7 @@ export const getAll = async () => {
 
 export const get = async (eventId) => {
   //Implement Code here
-  const id = checkString(eventId, "eventId");
+  checkString(eventId, "eventId");
   if (!ObjectId.isValid(eventId)) throw "the eventId is not valid!";
   const eventsCollection = await events();
   const eventsInfo = await eventsCollection.findOne({
@@ -190,7 +190,7 @@ export const get = async (eventId) => {
 
 export const remove = async (eventId) => {
   //Implement Code here
-  const id = checkString(eventId, "eventId");
+  checkString(eventId, "eventId");
   if (!ObjectId.isValid(eventId)) throw "the eventId is not valid!";
   const eventsCollection = await events();
   const theEvent = await get(eventId);
@@ -216,7 +216,7 @@ export const update = async (
   publicEvent
 ) => {
   //Implement Code here
-  const id = checkString(eventId, "eventId");
+  checkString(eventId, "eventId");
   if (!ObjectId.isValid(eventId)) throw "the eventId is invalid";
   if (!eventLocation) throw "eventLocation is required";
   if (!maxCapacity) throw "maxCapacity is required";

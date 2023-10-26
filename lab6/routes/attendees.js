@@ -17,7 +17,7 @@ attendeesRouter
     //code here for GET
     const eventId = req.params.eventId;
     try {
-      const id = checkString(eventId, "eventId");
+      checkString(eventId, "eventId");
       if (!ObjectId.isValid(eventId)) throw "the eventId is invalid";
     } catch (e) {
       return res.status(400).json({ error: e });
@@ -41,7 +41,7 @@ attendeesRouter
     const data = req.body;
     let { firstName, lastName, emailAddress } = data;
     try {
-      const id = checkString(eventId, "eventId");
+      checkString(eventId, "eventId");
       if (!ObjectId.isValid(eventId)) throw "the eventId is invalid";
       if (!data) throw "input is required";
       firstName = checkString(firstName, "firstName");
@@ -56,6 +56,7 @@ attendeesRouter
     }
     try {
       const targetEvent = await get(eventId);
+      if (!targetEvent) throw "the event with eventId does not exist";
     } catch (e) {
       return res.status(404).json({ error: e });
     }
@@ -78,7 +79,7 @@ attendeesRouter
     //code here for GET
     const attendeeId = req.params.attendeeId;
     try {
-      const id = checkString(attendeeId, "attendeeId");
+      checkString(attendeeId, "attendeeId");
       if (!ObjectId.isValid(attendeeId)) throw "the attendeeId is invalid";
     } catch (e) {
       return res.status(400).json({ error: e });
@@ -100,7 +101,7 @@ attendeesRouter
     //code here for DELETE
     let attendeeId = req.params.attendeeId;
     try {
-      const id = checkString(attendeeId, "attendeeId");
+      checkString(attendeeId, "attendeeId");
       if (!ObjectId.isValid(attendeeId)) throw "the attendeeId is invalid";
     } catch (e) {
       return res.status(400).json({ error: e });

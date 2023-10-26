@@ -42,3 +42,5 @@ export const timeToMinutes = (time) => {
   if (time.includes("AM") && hours === 12) hours = 0;
   return hours * 60 + mins;
 };
+
+

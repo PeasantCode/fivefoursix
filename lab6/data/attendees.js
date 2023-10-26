@@ -12,7 +12,7 @@ export const createAttendee = async (
   emailAddress
 ) => {
   //Implement Code here
-  const id = checkString(eventId, "eventId");
+  checkString(eventId, "eventId");
   if (!ObjectId.isValid(eventId)) throw "the eventId is invalid";
   firstName = checkString(firstName, "firstName");
   lastName = checkString(lastName, "lastName");
@@ -45,7 +45,7 @@ export const createAttendee = async (
 
 export const getAllAttendees = async (eventId) => {
   //Implement Code here
-  const id = checkString(eventId, "eventId");
+  checkString(eventId, "eventId");
   if (!ObjectId.isValid(eventId)) throw "the eventId is invalid";
   const eventsCollection = await events();
   const targetEvent = await eventsCollection.findOne({
@@ -57,7 +57,7 @@ export const getAllAttendees = async (eventId) => {
 
 export const getAttendee = async (attendeeId) => {
   //Implement Code here
-  const id = checkString(attendeeId, "attendeeId");
+  checkString(attendeeId, "attendeeId");
   if (!ObjectId.isValid(attendeeId)) throw "the attendeeId is invalid";
   const eventsCollection = await events();
   const targetEvent = await eventsCollection.findOne({
@@ -69,7 +69,7 @@ export const getAttendee = async (attendeeId) => {
 
 export const removeAttendee = async (attendeeId) => {
   //Implement Code her
-  const id = checkString(attendeeId, "attendeeId");
+  checkString(attendeeId, "attendeeId");
   if (!ObjectId.isValid(attendeeId)) throw "the attendeeId is invalid";
   const eventsCollection = await events();
   const targetEvent = await eventsCollection.findOne({

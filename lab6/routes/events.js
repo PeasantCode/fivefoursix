@@ -22,7 +22,6 @@ eventsRouter
       }));
       return res.json(allEvents);
     } catch (e) {
-      console.log(e);
       return res.status(404).json({ error: e });
     }
   })
@@ -181,7 +180,7 @@ eventsRouter
     //code here for GET
     let eventId = req.params.eventId;
     try {
-      const id = checkString(eventId, "eventId");
+      checkString(eventId, "eventId");
       if (!ObjectId.isValid(eventId)) throw "the eventId is not valid!";
     } catch (e) {
       return res.status(400).json({ error: e });
@@ -202,7 +201,7 @@ eventsRouter
     //code here for DELETE
     let eventId = req.params.eventId;
     try {
-      const id = checkString(eventId, "eventId");
+      checkString(eventId, "eventId");
       if (!ObjectId.isValid(eventId)) throw "the eventId is not valid!";
     } catch (e) {
       return res.status(400).json({ error: e });
@@ -228,7 +227,7 @@ eventsRouter
     const data = req.body;
 
     try {
-      const id = checkString(eventId, "eventId");
+      checkString(eventId, "eventId");
       if (!ObjectId.isValid(eventId)) throw "the eventId is invalid";
     } catch (e) {
       return res.status(400).json({ error: e });

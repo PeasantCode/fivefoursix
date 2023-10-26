@@ -45,3 +45,4 @@ export const timeToMinutes = (time) => {
   }
   return hours * 60 + mins;
 };
+console.log(timeToMinutes("12:00PM"));
