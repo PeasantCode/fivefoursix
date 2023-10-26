@@ -31,10 +31,10 @@ export const create = async (
   eventDescription = checkString(eventDescription, "eventDescription");
   if (eventDescription.length < 25)
     throw "the eventDescription must have at least 25 characters";
+  contactEmail = checkString(contactEmail, "contactEmail");
   if (!contactEmail.match(/^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/))
     throw "the contactEmail is invalid";
 
-  contactEmail = checkString(contactEmail, "contactEmail");
   eventDate = checkDate(eventDate, "eventDate");
   if (new Date(eventDate) - new Date() < 0)
     throw "eventTime must be greater than the current date";
