@@ -2,7 +2,8 @@
 // Note: please do not forget to export the router!
 import { Router } from "express";
 import { ObjectId } from "mongodb";
-import { create, get, getAll, remove, update } from "../data/events.js";
+import { events } from "../data/index.js";
+
 import {
   checkString,
   checkDate,
@@ -15,7 +16,7 @@ eventsRouter
   .get(async (req, res) => {
     //code here for GET
     try {
-      const allObjIdEvents = await getAll();
+      const allObjIdEvents = await events.getAll();
       const allEvents = allObjIdEvents.map((event) => ({
         _id: event._id.toString(),
         eventName: event.eventName,
@@ -156,7 +157,7 @@ eventsRouter
       if (!usStateAbbreviations.includes(state))
         throw "state must be a valid state abbreviation";
       if (!zip.match(/^[0-9]{5}$/gi)) throw "zip must consist of five numbers";
-      const newEvent = await create(
+      const newEvent = await events.create(
         eventName,
         eventDescription,
         eventLocation,
@@ -187,13 +188,12 @@ eventsRouter
     }
 
     try {
-      const eventsInfo = await get(eventId);
-      if (!eventsInfo) throw "the event with this eventId does not exist";
+      const eventsInfo = await events.get(eventId);
     } catch (e) {
       return res.status(404).json({ error: e });
     }
     try {
-      const eventsInfo = await get(eventId);
+      const eventsInfo = await events.get(eventId);
       return res.status(200).json(eventsInfo);
     } catch (e) {}
   })
@@ -208,14 +208,12 @@ eventsRouter
     }
 
     try {
-      const eventsInfo = await get(eventId);
-      if (!eventsInfo) throw "the event with this eventId does not exist";
+      const eventsInfo = await events.get(eventId);
     } catch (e) {
       return res.status(404).json({ error: e });
     }
     try {
-      const deleteInfo = await remove(eventId);
-      if (!deleteInfo) throw "delete failed";
+      const deleteInfo = await events.remove(eventId);
       return res.status(200).json(deleteInfo);
     } catch (e) {
       return res.json({ error: e });
@@ -228,13 +226,11 @@ eventsRouter
 
     try {
       checkString(eventId, "eventId");
-      if (!ObjectId.isValid(eventId)) throw "the eventId is invalid";
     } catch (e) {
       return res.status(400).json({ error: e });
     }
     try {
-      const targetEvent = await get(eventId);
-      if (!targetEvent) throw "the event with eventId does not exist";
+      const targetEvent = await events.get(eventId);
     } catch (e) {
       return res.status(404).json({ error: e });
     }
@@ -288,7 +284,7 @@ eventsRouter
       if (typeof maxCapacity !== "number")
         throw "the type of maxCapacity must be number";
       if (maxCapacity % 1) throw "maxCapacity must be integer";
-      const targetEvent = await get(eventId);
+      const targetEvent = await events.get(eventId);
       if (targetEvent.attendees.length >= maxCapacity)
         throw "the number of attendees in the event exceeds the maxCapacity to be updated so the maxCapacity cannot be updated";
       const { attendees, totalNumberOfAttendees } = targetEvent;
@@ -369,7 +365,7 @@ eventsRouter
       if (!usStateAbbreviations.includes(state))
         throw "state must be a valid state abbreviation";
       if (!zip.match(/^[0-9]{5}$/gi)) throw "zip must consist of five numbers";
-      const newEvent = await update(
+      const newEvent = await events.update(
         eventId,
         eventName,
         eventDescription,

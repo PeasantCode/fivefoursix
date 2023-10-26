@@ -2,13 +2,8 @@
 // Note: please do not forget to export the router!
 import { Router } from "express";
 import { ObjectId } from "mongodb";
-import { get } from "../data/events.js";
-import {
-  createAttendee,
-  getAllAttendees,
-  getAttendee,
-  removeAttendee,
-} from "../data/attendees.js";
+import { events } from "../data/index.js";
+import { attendees } from "..data/index.js";
 import { checkString } from "../helpers.js";
 export const attendeesRouter = Router();
 attendeesRouter
@@ -23,13 +18,12 @@ attendeesRouter
       return res.status(400).json({ error: e });
     }
     try {
-      const targetEvent = await get(eventId);
-      if (!targetEvent) throw "the event with eventId does not exist";
+      const targetEvent = await events.get(eventId);
     } catch (e) {
       return res.status(404).json({ error: e });
     }
     try {
-      const attendees = await getAllAttendees(eventId);
+      const attendees = await attendees.getAllAttendees(eventId);
       return res.status(200).json(attendees);
     } catch (e) {
       return res.json({ error: e });
@@ -55,13 +49,13 @@ attendeesRouter
       return res.status(400).json({ error: e });
     }
     try {
-      const targetEvent = await get(eventId);
+      const targetEvent = await events.get(eventId);
       if (!targetEvent) throw "the event with eventId does not exist";
     } catch (e) {
       return res.status(404).json({ error: e });
     }
     try {
-      const eventAfterAddAtt = await createAttendee(
+      const eventAfterAddAtt = await attendees.createAttendee(
         eventId,
         firstName,
         lastName,
@@ -85,13 +79,12 @@ attendeesRouter
       return res.status(400).json({ error: e });
     }
     try {
-      const ifAttendeeExist = await getAttendee(attendeeId);
-      if (!ifAttendeeExist) throw "the attendee with attendeeId does not exist";
+      const ifAttendeeExist = await attendees.getAttendee(attendeeId);
     } catch (e) {
       return res.status(404).json({ error: e });
     }
     try {
-      const targetAttendee = await getAttendee(attendeeId);
+      const targetAttendee = await attendees.getAttendee(attendeeId);
       return res.status(200).json(targetAttendee);
     } catch (e) {
       return res.json("getAttendee failed");
@@ -107,13 +100,13 @@ attendeesRouter
       return res.status(400).json({ error: e });
     }
     try {
-      const targetAttendee = await getAttendee(attendeeId);
+      const targetAttendee = await attendees.getAttendee(attendeeId);
       if (!targetAttendee) throw "the attendeeId does not exist";
     } catch (e) {
       return res.status(404).json({ error: e });
     }
     try {
-      const eventAfterDel = await removeAttendee(attendeeId);
+      const eventAfterDel = await attendees.removeAttendee(attendeeId);
       return res.status(200).json(eventAfterDel);
     } catch (e) {
       return res.json({ error: e });

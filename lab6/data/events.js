@@ -75,7 +75,7 @@ export const create = async (
   zip = checkString(zip, "zip");
   if (streetAddress.length < 3)
     throw "streetAddress must have at least 3 characters";
-  if (!city.match(/[a-z]{3,}/gi)) throw "city must have at least 3 characters";
+  if (!city.length < 3) throw "city must have at least 3 characters";
   const usStateAbbreviations = [
     "AL",
     "AK",
@@ -156,10 +156,6 @@ export const getAll = async () => {
   //Implement Code here
   const eventsCollection = await events();
   const allObjIdEvents = await eventsCollection.find().toArray();
-  // const allEvents = allObjIdEvents.map((event) => ({
-  //   _id: event._id.toString(),
-  //   eventName: event.eventName,
-  // }));
   const allEvents = allObjIdEvents
     .map((event) => {
       if (!event._id) {
