@@ -65,7 +65,7 @@ export const create = async (
     !priceOfAdmission.toString().match(/^\d+\.\d{0,2}$/)
   )
     throw "the length of priceOfAdmission cannot longer than two decimal place";
-  if (typeof eventLocation !== "object" || Array.isArray(eventDescription))
+  if (typeof eventLocation !== "object" || Array.isArray(eventLocation))
     throw "the type of eventLocation must be object";
   let { streetAddress, city, state, zip } = eventLocation;
   if (!streetAddress) throw "streetAddress are not supplied";
