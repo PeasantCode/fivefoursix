@@ -75,7 +75,7 @@ export const create = async (
   zip = checkString(zip, "zip");
   if (streetAddress.length < 3)
     throw "streetAddress must have at least 3 characters";
-  if (!city.length < 3) throw "city must have at least 3 characters";
+  if (city.length < 3) throw "city must have at least 3 characters";
   const usStateAbbreviations = [
     "AL",
     "AK",
@@ -173,11 +173,11 @@ export const getAll = async () => {
 
 export const get = async (eventId) => {
   //Implement Code here
-  checkString(eventId, "eventId");
-  if (!ObjectId.isValid(eventId)) throw "the eventId is not valid!";
+  const id = checkString(eventId, "eventId");
+  if (!ObjectId.isValid(id)) throw "the eventId is not valid!";
   const eventsCollection = await events();
   const eventsInfo = await eventsCollection.findOne({
-    _id: new ObjectId(eventId),
+    _id: new ObjectId(id),
   });
   if (!eventsInfo) throw "the event with this id does not exist";
   eventsInfo._id = eventsInfo._id.toString();
@@ -186,13 +186,13 @@ export const get = async (eventId) => {
 
 export const remove = async (eventId) => {
   //Implement Code here
-  checkString(eventId, "eventId");
-  if (!ObjectId.isValid(eventId)) throw "the eventId is not valid!";
+  const id = checkString(eventId, "eventId");
+  if (!ObjectId.isValid(id)) throw "the eventId is not valid!";
   const eventsCollection = await events();
-  const theEvent = await get(eventId);
+  const theEvent = await get(id);
   if (!theEvent) throw "the event with this is does not exist";
   const deleteInfo = await eventsCollection.findOneAndDelete({
-    _id: new ObjectId(eventId),
+    _id: new ObjectId(id),
   });
   if (!deleteInfo) throw "delete failed";
   return { eventName: theEvent.eventName, deleted: true };
@@ -212,8 +212,8 @@ export const update = async (
   publicEvent
 ) => {
   //Implement Code here
-  checkString(eventId, "eventId");
-  if (!ObjectId.isValid(eventId)) throw "the eventId is invalid";
+  const id = checkString(eventId, "eventId");
+  if (!ObjectId.isValid(id)) throw "the eventId is invalid";
   if (!eventLocation) throw "eventLocation is required";
   if (!maxCapacity) throw "maxCapacity is required";
   if (!priceOfAdmission && priceOfAdmission !== 0)
@@ -249,7 +249,7 @@ export const update = async (
   if (maxCapacity % 1) throw "maxCapacity must be integer";
   const eventsCollection = await events();
   const targetEvent = await eventsCollection.findOne({
-    _id: new ObjectId(eventId),
+    _id: new ObjectId(id),
   });
   if (!targetEvent) throw "the event with eventId does not exist";
   if (targetEvent.attendees.length > maxCapacity)
@@ -275,7 +275,7 @@ export const update = async (
   zip = checkString(zip, "zip");
   if (streetAddress.length < 3)
     throw "streetAddress must have at least 3 characters";
-  if (!city.match(/[a-z]{3,}/gi)) throw "city must have at least 3 characters";
+  if (city.length < 3) throw "city must have at least 3 characters";
   const usStateAbbreviations = [
     "AL",
     "AK",
@@ -333,7 +333,7 @@ export const update = async (
   if (!zip.match(/^[0-9]{5}$/gi)) throw "zip must consist of five numbers";
 
   const updateInfo = await eventsCollection.findOneAndUpdate(
-    { _id: new ObjectId(eventId) },
+    { _id: new ObjectId(id) },
     {
       $set: {
         eventName,

@@ -100,7 +100,7 @@ eventsRouter
       zip = checkString(zip, "zip");
       if (streetAddress.length < 3)
         throw "streetAddress must have at least 3 characters";
-      if (!city.match(/[a-z]{3,}/gi))
+      if (city.length < 3)
         throw "city must have at least 3 characters";
       const usStateAbbreviations = [
         "AL",
@@ -180,40 +180,42 @@ eventsRouter
   .get(async (req, res) => {
     //code here for GET
     let eventId = req.params.eventId;
+    let id;
     try {
-      checkString(eventId, "eventId");
-      if (!ObjectId.isValid(eventId)) throw "the eventId is not valid!";
+     id = checkString(eventId, "eventId");
+      if (!ObjectId.isValid(id)) throw "the eventId is not valid!";
     } catch (e) {
       return res.status(400).json({ error: e });
     }
 
     try {
-      const eventsInfo = await events.get(eventId);
+      const eventsInfo = await events.get(id);
     } catch (e) {
       return res.status(404).json({ error: e });
     }
     try {
-      const eventsInfo = await events.get(eventId);
+      const eventsInfo = await events.get(id);
       return res.status(200).json(eventsInfo);
     } catch (e) {}
   })
   .delete(async (req, res) => {
     //code here for DELETE
     let eventId = req.params.eventId;
+    let id;
     try {
-      checkString(eventId, "eventId");
-      if (!ObjectId.isValid(eventId)) throw "the eventId is not valid!";
+      id = checkString(eventId, "eventId");
+      if (!ObjectId.isValid(id)) throw "the eventId is not valid!";
     } catch (e) {
       return res.status(400).json({ error: e });
     }
 
     try {
-      const eventsInfo = await events.get(eventId);
+      const eventsInfo = await events.get(id);
     } catch (e) {
       return res.status(404).json({ error: e });
     }
     try {
-      const deleteInfo = await events.remove(eventId);
+      const deleteInfo = await events.remove(id);
       return res.status(200).json(deleteInfo);
     } catch (e) {
       return res.json({ error: e });
@@ -223,14 +225,14 @@ eventsRouter
     //code here for PUT
     const eventId = req.params.eventId;
     const data = req.body;
-
+    let id;
     try {
-      checkString(eventId, "eventId");
+      id = checkString(eventId, "eventId");
     } catch (e) {
       return res.status(400).json({ error: e });
     }
     try {
-      const targetEvent = await events.get(eventId);
+      const targetEvent = await events.get(id);
     } catch (e) {
       return res.status(404).json({ error: e });
     }
@@ -366,7 +368,7 @@ eventsRouter
         throw "state must be a valid state abbreviation";
       if (!zip.match(/^[0-9]{5}$/gi)) throw "zip must consist of five numbers";
       const newEvent = await events.update(
-        eventId,
+        id,
         eventName,
         eventDescription,
         eventLocation,

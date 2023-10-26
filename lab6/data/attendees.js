@@ -12,14 +12,14 @@ export const createAttendee = async (
   emailAddress
 ) => {
   //Implement Code here
-  checkString(eventId, "eventId");
-  if (!ObjectId.isValid(eventId)) throw "the eventId is invalid";
+  const id = checkString(eventId, "eventId");
+  if (!ObjectId.isValid(id)) throw "the eventId is invalid";
   firstName = checkString(firstName, "firstName");
   lastName = checkString(lastName, "lastName");
   emailAddress = checkString(emailAddress, "emailAddress");
   const eventsCollection = await events();
   const targetEvent = await eventsCollection.findOne({
-    _id: new ObjectId(eventId),
+    _id: new ObjectId(id),
   });
   if (!targetEvent) throw "the event with eventId does not exist";
   if (!emailAddress.match(/^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/))
@@ -30,7 +30,7 @@ export const createAttendee = async (
   const ifExist = oriAttendees.find((ele) => ele.emailAddress === emailAddress);
   if (ifExist) throw "this attender is already on the list ";
   const eventAfterAddAtt = await eventsCollection.findOneAndUpdate(
-    { _id: new ObjectId(eventId) },
+    { _id: new ObjectId(id) },
     {
       $push: {
         attendees: { _id: new ObjectId(), firstName, lastName, emailAddress },
@@ -40,16 +40,16 @@ export const createAttendee = async (
     { returnDocument: "after" }
   );
   if (!eventAfterAddAtt) throw "creating a new attender failed";
-  return await get(eventId);
+  return await get(id);
 };
 
 export const getAllAttendees = async (eventId) => {
   //Implement Code here
-  checkString(eventId, "eventId");
-  if (!ObjectId.isValid(eventId)) throw "the eventId is invalid";
+  const id = checkString(eventId, "eventId");
+  if (!ObjectId.isValid(id)) throw "the eventId is invalid";
   const eventsCollection = await events();
   const targetEvent = await eventsCollection.findOne({
-    _id: new ObjectId(eventId),
+    _id: new ObjectId(id),
   });
   if (!targetEvent) throw "the event with eventId does not exist";
   return targetEvent.attendees;
@@ -57,29 +57,29 @@ export const getAllAttendees = async (eventId) => {
 
 export const getAttendee = async (attendeeId) => {
   //Implement Code here
-  checkString(attendeeId, "attendeeId");
-  if (!ObjectId.isValid(attendeeId)) throw "the attendeeId is invalid";
+  const id = checkString(attendeeId, "attendeeId");
+  if (!ObjectId.isValid(id)) throw "the attendeeId is invalid";
   const eventsCollection = await events();
   const targetEvent = await eventsCollection.findOne({
-    attendees: { $elemMatch: { _id: new ObjectId(attendeeId) } },
+    attendees: { $elemMatch: { _id: new ObjectId(id) } },
   });
   if (!targetEvent) throw "the attendee with attendeeId does not exist";
-  return targetEvent.attendees.find((ele) => ele._id.toString() === attendeeId);
+  return targetEvent.attendees.find((ele) => ele._id.toString() === id);
 };
 
 export const removeAttendee = async (attendeeId) => {
   //Implement Code her
-  checkString(attendeeId, "attendeeId");
-  if (!ObjectId.isValid(attendeeId)) throw "the attendeeId is invalid";
+  const id = checkString(attendeeId, "attendeeId");
+  if (!ObjectId.isValid(id)) throw "the attendeeId is invalid";
   const eventsCollection = await events();
   const targetEvent = await eventsCollection.findOne({
-    attendees: { $elemMatch: { _id: new ObjectId(attendeeId) } },
+    attendees: { $elemMatch: { _id: new ObjectId(id) } },
   });
   if (!targetEvent) throw "the attendee with attendeeId does not exist";
   const deleteInfo = await eventsCollection.findOneAndUpdate(
     { _id: new ObjectId(targetEvent._id) },
     {
-      $pull: { attendees: { _id: new ObjectId(attendeeId) } },
+      $pull: { attendees: { _id: new ObjectId(id) } },
       $set: { totalNumberOfAttendees: targetEvent.totalNumberOfAttendees - 1 },
     },
     { returnDocument: "after" }
