@@ -28,12 +28,12 @@ export const create = async (
   if (publicEvent === undefined) throw "publicEvent is required";
   eventName = checkString(eventName, "eventName");
   if (eventName.length < 5) throw "the length of eventName must longer than 5";
+  eventDescription = checkString(eventDescription, "eventDescription");
   if (eventDescription.length < 25)
     throw "the eventDescription must have at least 25 characters";
   if (!contactEmail.match(/^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/))
     throw "the contactEmail is invalid";
 
-  eventDescription = checkString(eventDescription, "eventDescription");
   contactEmail = checkString(contactEmail, "contactEmail");
   eventDate = checkDate(eventDate, "eventDate");
   if (new Date(eventDate) - new Date() < 0)
