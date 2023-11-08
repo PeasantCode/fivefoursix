@@ -1,5 +1,4 @@
 /*This file should have 10 CSS rulesets */
-/* General body styling */
 body {
     font-family: 'Arial', sans-serif;
     margin: 0;
@@ -7,14 +6,17 @@ body {
     background: #f4f4f4;
 }
 
-/* Main heading */
 h1 {
-    color: #ec1d24; /* Marvel red color */
+    color: #ec1d24; 
     text-align: center;
     margin-top: 20px;
 }
+h2{
+    color: #b1ec1d; 
+    text-align: center;
+    margin-top: 15px;
+}
 
-/* Main element styling */
 main {
     width: 80%;
     margin: 30px auto;
@@ -31,12 +33,10 @@ p {
     color: #333;
 }
 
-/* Form styling */
 form {
     margin-top: 20px;
 }
 
-/* Input field styling */
 input[type="text"] {
     width: 100%;
     padding: 10px;
@@ -45,9 +45,8 @@ input[type="text"] {
     border-radius: 4px;
 }
 
-/* Submit button styling */
 input[type="submit"] {
-    background-color: #ec1d24; /* Marvel red color */
+    background-color: #ec1d24; 
     color: white;
     padding: 10px 20px;
     border: none;
@@ -56,21 +55,25 @@ input[type="submit"] {
     transition: background-color 0.3s ease;
 }
 
-/* Submit button hover effect */
 input[type="submit"]:hover {
-    background-color: #c11b1e; /* A darker shade of Marvel red */
+    background-color: #c11b1e; 
 }
 
-/* Label styling */
 label {
     display: block;
     margin-bottom: 5px;
     color: #666;
 }
 
-/* Responsive design */
-@media (max-width: 768px) {
-    main {
-        width: 95%;
-    }
+ol {
+    padding-left: 20px; 
+    background: #f8f8f8; 
+    border-left: 3px solid #d3d3d3; 
+}
+
+
+li {
+    margin-bottom: 5px;
+    padding: 5px; 
+    border-bottom: 1px solid #ececec; 
 }
