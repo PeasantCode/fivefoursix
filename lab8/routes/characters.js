@@ -25,7 +25,11 @@ router.route("/searchmarvelcharacters").post(async (req, res) => {
     id: character.id,
     name: character.name,
   }));
-  return res.render("characterSearchResults", { idsNames, characterName });
+  return res.render("characterSearchResults", {
+    title: "Marvel Characters Found",
+    idsNames,
+    characterName,
+  });
 });
 
 router.route("/marvelcharacter/:id").get(async (req, res) => {
@@ -39,6 +43,7 @@ router.route("/marvelcharacter/:id").get(async (req, res) => {
   const { name, description, thumbnail, comics } = character;
   const { path, extension } = thumbnail;
   res.render("characterById", {
+    title: name,
     name,
     description,
     imgUrl: `${path}.${extension}`,

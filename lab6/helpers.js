@@ -29,7 +29,7 @@ export const checkDate = (date, whatDate) => {
 
 export const checkTime = (time, whatTime) => {
   time = checkString(time, whatTime);
-  if (!time.match(/^(1[0-2]|0?[1-9]):[0-5][0-9] [AP]M$/))
+  if (!time.match(/^(1[0-2]|[1-9]):[0-5][0-9] [AP]M$/))
     throw `${whatTime} is invalid`;
   return time;
 };
